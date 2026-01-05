@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: dev
   application:
     name: Anime Service
   threads:
@@ -13,3 +15,9 @@ server:
   tomcat:
     threads:
       max: 20
+
+database:
+  mysql:
+    url: localhost
+    username: root
+    password: root
