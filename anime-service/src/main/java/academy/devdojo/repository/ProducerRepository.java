@@ -27,8 +27,9 @@ public class ProducerRepository {
         return producerData.getData().stream().filter(producer -> producer.getName().equalsIgnoreCase(name)).findFirst();
     }
 
-    public void save(Producer producer) {
+    public Producer save(Producer producer) {
         producerData.getData().add(producer);
+        return producer;
     }
 
     public void delete(Producer producer) {

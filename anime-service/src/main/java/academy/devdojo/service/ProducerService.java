@@ -25,12 +25,13 @@ public class ProducerService {
     public List<Producer> filterByName(String name) {
         return repository.filterByName(name);
     }
+
     public Producer findByName(String name) {
         return repository.findByName(name).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Producer not found"));
     }
 
-    public void save(Producer producer) {
-        repository.save(producer);
+    public Producer save(Producer producer) {
+        return repository.save(producer);
     }
 
     public void delete(Producer producer) {

@@ -1,47 +1,39 @@
 package academy.devdojo.repository;
 
 import academy.devdojo.domain.Anime;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
+@AllArgsConstructor
 public class AnimeRepository {
-    private final static ArrayList<Anime> animeList = new ArrayList<>();
-
-    static {
-        Anime dbz = new Anime(1L, "DBZ", LocalDateTime.now());
-        Anime pokemon = new Anime(2L, "Pokemon", LocalDateTime.now());
-        Anime pokemon2 = new Anime(3L, "Pokemon", LocalDateTime.now());
-        Anime onePiece = new Anime(4L, "One Piece", LocalDateTime.now());
-        Anime naruto = new Anime(5L, "Naruto", LocalDateTime.now());
-        animeList.addAll(List.of(dbz, pokemon, pokemon2, onePiece, naruto));
-    }
+    private final AnimeData animeData;
 
     public List<Anime> list() {
-        return animeList;
+        return animeData.getAnimeList();
     }
 
     public Optional<Anime> findById(Long id) {
-        return animeList.stream().filter(anime -> anime.getId().equals(id)).findFirst();
+        return animeData.getAnimeList().stream().filter(anime -> anime.getId().equals(id)).findFirst();
     }
 
     public List<Anime> filterByName(String name) {
-        return animeList.stream().filter(anime -> anime.getName().equalsIgnoreCase(name)).toList();
+        return animeData.getAnimeList().stream().filter(anime -> anime.getName().equalsIgnoreCase(name)).toList();
     }
     public Optional<Anime> findByName(String name) {
-        return animeList.stream().filter(anime -> anime.getName().equalsIgnoreCase(name)).findFirst();
+        return animeData.getAnimeList().stream().filter(anime -> anime.getName().equalsIgnoreCase(name)).findFirst();
     }
 
-    public void save(Anime anime) {
-        animeList.add(anime);
+    public Anime save(Anime anime) {
+        animeData.getAnimeList().add(anime);
+        return anime;
     }
 
     public void delete(Anime anime) {
-        animeList.remove(anime);
+        animeData.getAnimeList().remove(anime);
     }
 
     public void update(Anime anime) {

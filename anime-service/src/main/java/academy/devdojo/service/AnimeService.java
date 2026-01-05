@@ -1,6 +1,7 @@
 package academy.devdojo.service;
 
 import academy.devdojo.domain.Anime;
+import academy.devdojo.domain.Producer;
 import academy.devdojo.repository.AnimeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,8 +30,8 @@ public class AnimeService {
         return repository.findByName(name).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Anime not found"));
     }
 
-    public void save(Anime Anime) {
-        repository.save(Anime);
+    public Anime save(Anime Anime) {
+        return repository.save(Anime);
     }
 
     public void delete(Anime Anime) {
